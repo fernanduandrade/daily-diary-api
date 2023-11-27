@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DailyDiary.Application\DailyDiary.Application.csproj" />
+      <ProjectReference Include="..\DailyDiary.Infrastructure.Persistence\DailyDiary.Infrastructure.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+    </ItemGroup>
+
 </Project>

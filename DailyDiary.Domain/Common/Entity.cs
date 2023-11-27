@@ -8,6 +8,7 @@ public abstract class Entity
     public Guid Id { get; set; }
     private readonly List<IDomainEvent> _domainEvents = new();
     
+    [NotMapped]
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
     
     public void Raise(IDomainEvent domainEvent)

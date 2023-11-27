@@ -6,7 +6,7 @@ namespace Domain.UniTest.Users;
 public class EmailTest
 {
     [Fact(DisplayName = "Should not create email when is invalid.")]
-    [Trait("DailyDiary", "DomainTest")]
+    [Trait("Domain", "EmailTest")]
     public void Should_Not_CreateEmail_When_IsInValid()
     {
         // arrange
@@ -22,7 +22,7 @@ public class EmailTest
     }
     
     [Fact(DisplayName = "Should not create email when is empty.")]
-    [Trait("DailyDiary", "DomainTest")]
+    [Trait("Domain", "EmailTest")]
     public void Should_Not_CreateEmail_When_IsEmpty()
     {
         // arrange
@@ -38,8 +38,8 @@ public class EmailTest
     }
     
     [Fact(DisplayName = "Should not create email when is empty.")]
-    [Trait("DailyDiary", "DomainTest")]
-    public void Should_CreateEmail_When_IsVali()
+    [Trait("Domain", "EmailTest")]
+    public void Should_CreateEmail_When_IsValid()
     {
         // arrange
         string emailInput = "testuser@gmail.com";

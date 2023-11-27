@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.API", "DailyDiar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.Infrastructure", "DailyDiary.Infrastructure\DailyDiary.Infrastructure.csproj", "{2265285D-980D-4FB8-B380-F9C6C93EDC74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.infrastructure.Persistence", "DailyDiary.infrastructure.Persistence\DailyDiary.infrastructure.Persistence.csproj", "{757767CF-B8CF-4421-AF5D-E18EF1B8F8EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.Infrastructure.Persistence", "DailyDiary.Infrastructure.Persistence\DailyDiary.Infrastructure.Persistence.csproj", "{757767CF-B8CF-4421-AF5D-E18EF1B8F8EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.Application", "DailyDiary.Application\DailyDiary.Application.csproj", "{88FA41C7-9F85-4A78-AC98-8C75E4D57ADC}"
 EndProject

@@ -1,25 +1,46 @@
-var builder = WebApplication.CreateBuilder(args);
+using DailyDiary.Application;
+using DailyDiary.Infrastructure;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace DailyDiary.API
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            #region builder
+
+            var builder = WebApplication.CreateBuilder(args);
+            var configuration = builder.Configuration;
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddApplication();
+            builder.Services.AddPersistence();
+            builder.Services.AddInfraDependecies(configuration);
+            builder.Services.AddHealthChecks();
+            builder.Services.AddSwaggerGen();
+
+            #endregion
+
+            #region app
+
+            var app = builder.Build();
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+            app.MapControllers();
+            app.MapHealthChecks("/_health");
+            app.Run();
+
+
+            #endregion
+
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
