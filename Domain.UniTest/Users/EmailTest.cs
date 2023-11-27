@@ -1,0 +1,54 @@
+using DailyDiary.Domain.User;
+using FluentAssertions;
+
+namespace Domain.UniTest.Users;
+
+public class EmailTest
+{
+    [Fact(DisplayName = "Should not create email when is invalid.")]
+    [Trait("DailyDiary", "DomainTest")]
+    public void Should_Not_CreateEmail_When_IsInValid()
+    {
+        // arrange
+        
+        // act
+        Action action = () =>
+        {
+            _ = Email.Create("testmail.com").Value;
+        };
+
+        // assert
+        action.Should().Throw<InvalidOperationException>();
+    }
+    
+    [Fact(DisplayName = "Should not create email when is empty.")]
+    [Trait("DailyDiary", "DomainTest")]
+    public void Should_Not_CreateEmail_When_IsEmpty()
+    {
+        // arrange
+        
+        // act
+        Action action = () =>
+        {
+            _ = Email.Create("").Value;
+        };
+
+        // assert
+        action.Should().Throw<InvalidOperationException>();
+    }
+    
+    [Fact(DisplayName = "Should not create email when is empty.")]
+    [Trait("DailyDiary", "DomainTest")]
+    public void Should_CreateEmail_When_IsVali()
+    {
+        // arrange
+        string emailInput = "testuser@gmail.com";
+        
+        // act
+        Email email = Email.Create(emailInput).Value;
+        
+        // assert
+        email.Value.Should().NotBeNull();
+    }
+    
+}
