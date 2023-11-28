@@ -1,6 +1,9 @@
+using System.Text;
 using DailyDiary.API.Setup;
 using DailyDiary.Application;
 using DailyDiary.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DailyDiary.API
 {
@@ -18,8 +21,8 @@ namespace DailyDiary.API
             builder.Services.AddPersistence();
             builder.Services.AddInfraDependecies(configuration);
             builder.Services.AddHealthChecks();
-            builder.Services.AddSwaggerGen(c => c.EnableAnnotations());
             builder.Services.AddAuth(configuration);
+            builder.Services.AddSwagger();
 
             #endregion
 

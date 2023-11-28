@@ -31,7 +31,7 @@ public class UserControllerTest
         var response = await _fixture.Client.PostAsJsonAsync("api/users", payload);
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         string responseString = await response.Content.ReadAsStringAsync();
-        var result = JsonSerializer.Deserialize<Error>(responseString);
-        result.Code.Should().Be("InvalidEmail");
+        var result = JsonSerializer.Deserialize<Error>(responseString, new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
+        result.Code.Should().Be("Invalid email");
     }
 }
