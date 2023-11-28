@@ -15,3 +15,10 @@ public class User : Entity
         return user;
     }
 }
+
+public static class UserErrors
+{
+    public static readonly Error EmptyName = new ("Empty Name", "User name can't be empty");
+    public static readonly Error InvalidEmail = new ("Invalid email", "Email already exists");
+    public static readonly Error NotFound = new ("Not Found", "Email or password not correct");
+}

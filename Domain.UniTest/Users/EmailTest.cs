@@ -45,7 +45,7 @@ public class EmailTest
         string emailInput = "testuser@gmail.com";
         
         // act
-        Email email = Email.Create(emailInput).Value;
+        var email = Email.Create(emailInput);
         
         // assert
         email.Value.Should().NotBeNull();

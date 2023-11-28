@@ -17,7 +17,7 @@ namespace DailyDiary.API
             builder.Services.AddPersistence();
             builder.Services.AddInfraDependecies(configuration);
             builder.Services.AddHealthChecks();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(config => config.EnableAnnotations());
 
             #endregion
 

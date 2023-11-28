@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.Infrastructure.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyDiary.Application", "DailyDiary.Application\DailyDiary.Application.csproj", "{88FA41C7-9F85-4A78-AC98-8C75E4D57ADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTest", "Application.UnitTest\Application.UnitTest.csproj", "{5E4D1608-B338-44A3-8B6E-6ACF80E21969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,7 @@ Global
 		{2265285D-980D-4FB8-B380-F9C6C93EDC74} = {826ED866-154D-4CA8-A001-BFDFB522D07A}
 		{757767CF-B8CF-4421-AF5D-E18EF1B8F8EE} = {826ED866-154D-4CA8-A001-BFDFB522D07A}
 		{88FA41C7-9F85-4A78-AC98-8C75E4D57ADC} = {D46856CF-E872-4A05-BD8D-324698D089B7}
+		{5E4D1608-B338-44A3-8B6E-6ACF80E21969} = {073739C0-9F6A-4861-982E-EAF8E1285091}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{96ADD9B3-C46D-4297-BA65-5AA7AA242862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,5 +63,9 @@ Global
 		{88FA41C7-9F85-4A78-AC98-8C75E4D57ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88FA41C7-9F85-4A78-AC98-8C75E4D57ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88FA41C7-9F85-4A78-AC98-8C75E4D57ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E4D1608-B338-44A3-8B6E-6ACF80E21969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4D1608-B338-44A3-8B6E-6ACF80E21969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4D1608-B338-44A3-8B6E-6ACF80E21969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4D1608-B338-44A3-8B6E-6ACF80E21969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
