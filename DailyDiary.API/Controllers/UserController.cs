@@ -2,12 +2,14 @@ using DailyDiary.API.Controllers.Base;
 using DailyDiary.Application.Users.CreateUser;
 using DailyDiary.Application.Users.GetUserById;
 using DailyDiary.Application.Users.LoginUser;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DailyDiary.API.Controllers;
 
 public class UserController : BaseController
 {
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create(CreateUserCommand command)
     {
@@ -18,6 +20,7 @@ public class UserController : BaseController
             error => BadRequest(error));
     }
     
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Create([FromQuery] GetUserByIdQuery query)
     {

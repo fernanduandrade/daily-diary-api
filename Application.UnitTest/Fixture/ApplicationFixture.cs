@@ -19,16 +19,6 @@ public class ApplicationFixture : IDisposable
         return user;
     }
     
-    public User GenerateUserWithHash(string nameInput, string emailInput, string hash)
-    {
-        var id = new Faker().Random.Guid();
-        Email email = Email.Create(emailInput).Value;
-        Password password = Password.Create(hash).Value;
-        var user = User.Create(email, nameInput, password);
-        user.Id = id;
-        return user;
-    }
-
     public UserDto CreateUserDto(User user)
     {
         var mapperConfig = new MapperConfiguration(c =>

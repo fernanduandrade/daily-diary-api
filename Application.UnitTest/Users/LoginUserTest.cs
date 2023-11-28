@@ -91,5 +91,7 @@ public class LoginUserTest
             ok => ok,
             error => null);
         value.Data.Token.Should().NotBeNull();
+        value.Message.Should().Be("OK");
+        value.Success.Should().Be(true);
     }
 }
