@@ -3,7 +3,7 @@ Daily Diary API
 
 ## CI
 
-[![.NET](https://github.com/fernanduandrade/clean-architecture-api/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/fernanduandrade/clean-architecture-api/actions/workflows/dotnet.yml)
+[![.NET](https://github.com/fernanduandrade/daily-diary-api/actions/workflows/dotnet.yml/badge.svg)](https://github.com/fernanduandrade/daily-diary-api/actions/workflows/dotnet.yml)
 
 ## Ajude com uma estrela! :star:
 
