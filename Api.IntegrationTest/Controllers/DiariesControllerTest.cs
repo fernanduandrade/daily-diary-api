@@ -82,4 +82,34 @@ public class DiariesControllerTest
 
         result.Data.Count.Should().Be(0);
     }
+    
+    [Fact(DisplayName = "Should delete a diary by id")]
+    [Trait("Api ", "Diary")]
+    public async Task DeleteDiary_Should_Return204()
+    {
+        Guid diaryId = new Guid("4510804c-4d88-4916-bfab-a37e13e32760");
+
+        var response = await _fixture.Client.DeleteAsync($"api/diaries/{diaryId}");
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+    }
+    
+    [Fact(DisplayName = "Should return a diary by id")]
+    [Trait("Api ", "Diary")]
+    public async Task DeleteDiary_Should_Return200()
+    {
+        Guid diaryId = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bc");
+
+        var response = await _fixture.Client.GetAsync($"api/diaries/{diaryId}");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+    
+    [Fact(DisplayName = "Should return not found diary by id")]
+    [Trait("Api ", "Diary")]
+    public async Task DeleteDiary_Should_Return400()
+    {
+        Guid diaryId = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bd");
+
+        var response = await _fixture.Client.GetAsync($"api/diaries/{diaryId}");
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 }

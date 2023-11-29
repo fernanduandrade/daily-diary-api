@@ -26,9 +26,12 @@ public class Seeder
 
         #region DiaryData
         var diary = Diary.Create("Today was hard", "content", "sad", genericUser.Id);
-        _dbContext.Diaries.Add(diary);
+        var genericDiary = Diary.Create("Today was hard", "content", "sad", genericUser.Id);
+        genericDiary.Id = new Guid("4510804c-4d88-4916-bfab-a37e13e32760");
+        var genericDiary2 = Diary.Create("Hard", "content", "sad", genericUser.Id);
+        genericDiary2.Id = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bc");
+        _dbContext.Diaries.AddRange(new List<Diary>() { diary, genericDiary, genericDiary2 });
         #endregion
-        
         
         _dbContext.SaveChanges();
     }

@@ -33,4 +33,24 @@ public class DiaryRepository : IDiaryRepository
 
         return diaries;
     }
+
+    public async Task<Diary> Update(Diary diary)
+    {
+        _context.Diaries.Update(diary);
+        await _context.SaveChangesAsync();
+        return diary;
+    }
+
+    public async Task<Diary> GetById(Guid id)
+    {
+        var diary = await _context.Diaries
+            .SingleOrDefaultAsync(x => x.Id == id);
+        return diary;
+    }
+
+    public void Delete(Diary diary)
+    {
+        _context.Diaries.Remove(diary);
+        _context.SaveChanges();
+    }
 }

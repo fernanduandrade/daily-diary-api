@@ -30,4 +30,5 @@ public class Diary : Entity
 public class DiaryErrors
 {
     public static readonly Error InvalidDate = new("Invalid Date", "Can not create two diaries in the same day");
+    public static readonly Error NotFound = new("Not Found", "Diary not found");
 }
