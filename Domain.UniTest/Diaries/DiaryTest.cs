@@ -13,7 +13,7 @@ public class DiaryTest
         // arrange
         
         // act
-        var diary = Diary.Create("test", "something", "sad");
+        var diary = Diary.Create("test", "something", "sad", Guid.NewGuid());
         
         // assert
         diary.IsPublic.Should().Be(false);
@@ -26,7 +26,7 @@ public class DiaryTest
         // arrange
         
         // act
-        var diary = Diary.Create("test", "something", "sad", true);
+        var diary = Diary.Create("test", "something", "sad", Guid.NewGuid(), true);
         
         // assert
         diary.IsPublic.Should().Be(true);

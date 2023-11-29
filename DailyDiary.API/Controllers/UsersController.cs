@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DailyDiary.API.Controllers;
 
-public class UserController : BaseController
+public class UsersController : BaseController
 {
     [Authorize]
     [HttpPost]

@@ -1,4 +1,5 @@
 using System.Text;
+using DailyDiary.Domain.Diaries;
 using DailyDiary.Domain.Users;
 using DailyDiary.Infrastructure.Persistence.Data;
 using DailyDiary.Infrastructure.Persistence.Data.Repositories;
@@ -27,6 +28,7 @@ public static class DependecyInjection
     public static IServiceCollection AddPersistence(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IDiaryRepository, DiaryRepository>();
         return services;
     }
 

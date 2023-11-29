@@ -12,14 +12,15 @@ public class Diary : Entity
     public string? Mood { get; private set; }
     public virtual User User { get; private set; }
     public Guid UserId { get; private set ;}
-    public static Diary Create(string title, string text, string mood, bool isPublic = false)
+    public static Diary Create(string title, string text, string mood, Guid userId, bool isPublic = false)
     {
         var diary = new Diary()
         {
             Title = title,
             Text = text,
             Mood = mood,
-            IsPublic = isPublic
+            IsPublic = isPublic,
+            UserId = userId
         };
 
         return diary;

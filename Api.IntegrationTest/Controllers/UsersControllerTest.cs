@@ -14,11 +14,11 @@ using FluentAssertions;
 namespace Api.IntegrationTest.Controllers;
 
 [Collection(nameof(AppCollectionFixture))]
-public class UserControllerTest
+public class UsersControllerTest
 {
     private readonly AppFixture<Program> _fixture;
 
-    public UserControllerTest(AppFixture<Program> fixture)
+    public UsersControllerTest(AppFixture<Program> fixture)
     {
         _fixture = fixture;
         string token = _fixture.Login().GetAwaiter().GetResult();

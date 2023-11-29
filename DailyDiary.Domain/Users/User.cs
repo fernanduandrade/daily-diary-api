@@ -8,7 +8,6 @@ public class User : Entity
     public Email? Email { get; private set; }
     public Password? Password { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
-    public List<Diary> Diaries { get; private set; }
     
     public string? Name { get; private set; }
 

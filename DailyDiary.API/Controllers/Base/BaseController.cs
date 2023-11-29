@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DailyDiary.API.Controllers.Base;
 
 [ApiController]
-[Route("api/[controller]s")]
+[Route("api/[controller]")]
 public class BaseController : ControllerBase
 {
     private ISender _mediator = null;

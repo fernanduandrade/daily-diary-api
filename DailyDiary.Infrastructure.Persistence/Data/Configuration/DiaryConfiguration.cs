@@ -12,6 +12,7 @@ public class DiaryConfiguration : IEntityTypeConfiguration<Diary>
         builder.ToTable("diaries");
         
         builder.HasKey(x => x.Id);
+        
         builder.Property(x => x.CreatedAt).HasColumnName("created_at");
         builder.Property(x => x.Title).HasColumnName("title");
         builder.Property(x => x.Text).HasColumnName("text");
