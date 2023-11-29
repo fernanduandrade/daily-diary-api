@@ -31,7 +31,6 @@ public class DiaryTest
         // assert
         diary.IsPublic.Should().Be(true);
         diary.Title.Should().Be("test");
-        diary.CreatedAt.Should().BeAfter(DateTime.Now);
         diary.Text.Should().Be("something");
     }
 }

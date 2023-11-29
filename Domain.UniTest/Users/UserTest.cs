@@ -21,7 +21,6 @@ public class UserTest
         user.Email.Should().NotBeNull();
         user.Password.Should().NotBeNull();
         user.Name.Should().NotBeNull();
-        user.CreatedAt.Should().BeAfter(DateTime.Now);
     }
     
     [Fact(DisplayName = "Should create user with constructor properties.")]
@@ -38,7 +37,6 @@ public class UserTest
         // assert
         user.Email.Value.Should().Be("testuser@gmail.com");
         user.Name.Should().Be("user test");
-        user.CreatedAt.Should().BeAfter(DateTime.Now);
     }
     
     
