@@ -23,4 +23,14 @@ public class DiaryRepository : IDiaryRepository
         await _context.SaveChangesAsync();
         return diary;
     }
+
+    public async Task<List<Diary>> GetAllByUserId(Guid userId)
+    {
+        var diaries = await _context.Diaries
+            .Where(x => x.UserId == userId)
+            .AsNoTracking()
+            .ToListAsync();
+
+        return diaries;
+    }
 }

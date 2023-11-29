@@ -27,7 +27,7 @@ public class DiariesControllerTest
 
     [Fact(DisplayName = "Should not be able to create more than one diary per day")]
     [Trait("Api ", "Diary")]
-    public async Task CreateMoreThanOneDiary_Should_Returns400()
+    public async Task CreateMoreThanOneDiary_Should_Return400()
     {
         CreateDiaryCommand payload = new(
             new Guid("8636d1c9-e331-4da6-959f-d2133f754fda"), "Happy day", "content", "happy",
@@ -46,7 +46,7 @@ public class DiariesControllerTest
     
     [Fact(DisplayName = "Should create a diary")]
     [Trait("Api ", "Diary")]
-    public async Task CreateDiary_Should_Returns200()
+    public async Task CreateDiary_Should_Return200()
     {
         CreateDiaryCommand payload = new(
             new Guid("5b359013-c291-4e89-9274-877dfeb85d02"), "Things getting better", "content", "happy",
@@ -64,5 +64,22 @@ public class DiariesControllerTest
         result.Data.Mood.Should().Be("happy");
         result.Data.Text.Should().Be("content");
         result.Data.IsPublic.Should().Be(true);
+    }
+    
+    [Fact(DisplayName = "Should return an empty list of user diaries")]
+    [Trait("Api ", "Diary")]
+    public async Task ListOfUserDiaries_Should_Return200()
+    {
+        Guid userId = new Guid("5b359013-c291-4e89-9274-877dfeb85d02");
+
+        var response = await _fixture.Client.GetAsync($"api/diaries/users/{userId}");
+        string responseString = await response.Content.ReadAsStringAsync();
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var result = JsonSerializer.Deserialize<ApiResponse<List<DiaryDto>>>(responseString,
+            new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+        result.Data.Count.Should().Be(0);
     }
 }

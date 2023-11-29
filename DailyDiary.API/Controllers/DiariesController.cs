@@ -1,5 +1,6 @@
 using DailyDiary.API.Controllers.Base;
 using DailyDiary.Application.Diaries.CreateDiary;
+using DailyDiary.Application.Diaries.GetUserDairies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,5 +17,13 @@ public class DiariesController : BaseController
         return result.Match<IActionResult>(
             diary => Ok(diary),
             error => BadRequest(error));
+    }
+
+    [HttpGet("users/{userId}")]
+    public async Task<IActionResult> GetUserDiaries([FromRoute] GetUserDiariesQuery query)
+    {
+        var result = await Mediator.Send(query);
+
+        return Ok(result);
     }
 }
