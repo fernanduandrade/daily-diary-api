@@ -1,6 +1,6 @@
 using DailyDiary.Domain.Common;
 using System.Net.Mail;
-namespace DailyDiary.Domain.User;
+namespace DailyDiary.Domain.Users;
 
 public sealed record Email
 {

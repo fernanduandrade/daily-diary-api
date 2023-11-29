@@ -2,7 +2,7 @@ using AutoMapper;
 using Bogus;
 using DailyDiary.Application.Common.Mapping;
 using DailyDiary.Application.Users.Dto;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using Xunit;
 
 namespace Application.UnitTest.Fixture;

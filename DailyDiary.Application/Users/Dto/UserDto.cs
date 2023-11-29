@@ -1,6 +1,6 @@
 using AutoMapper;
 using DailyDiary.Application.Common.Mapping;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 
 namespace DailyDiary.Application.Users.Dto;
 

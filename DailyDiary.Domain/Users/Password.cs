@@ -1,7 +1,7 @@
 using DailyDiary.Domain.Common;
 using BC = BCrypt.Net;
 
-namespace DailyDiary.Domain.User;
+namespace DailyDiary.Domain.Users;
 
 
 public record Password

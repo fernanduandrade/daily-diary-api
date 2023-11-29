@@ -1,7 +1,7 @@
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
 using DailyDiary.Domain.Common;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using OneOf;
 using MediatR;
 using Microsoft.Extensions.Configuration;

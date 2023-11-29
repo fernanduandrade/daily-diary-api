@@ -5,7 +5,7 @@ using Bogus;
 using DailyDiary.API;
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.IntegrationTest.Setup;

@@ -1,4 +1,4 @@
-namespace DailyDiary.Domain.User;
+namespace DailyDiary.Domain.Users;
 
 public interface IUserRepository
 {

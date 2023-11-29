@@ -2,7 +2,7 @@ using AutoMapper;
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
 using DailyDiary.Domain.Common;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using MediatR;
 using OneOf;
 

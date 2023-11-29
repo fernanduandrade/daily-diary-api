@@ -1,5 +1,5 @@
 using System.Text;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using DailyDiary.Infrastructure.Persistence.Data;
 using DailyDiary.Infrastructure.Persistence.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

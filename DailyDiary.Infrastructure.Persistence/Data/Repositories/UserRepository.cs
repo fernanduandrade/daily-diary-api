@@ -1,4 +1,4 @@
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace DailyDiary.Infrastructure.Persistence.Data.Repositories;

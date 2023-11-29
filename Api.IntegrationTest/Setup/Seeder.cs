@@ -1,4 +1,4 @@
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using DailyDiary.Infrastructure.Persistence.Data;
 
 namespace Api.IntegrationTest.Setup;

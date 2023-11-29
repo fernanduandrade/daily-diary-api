@@ -3,7 +3,7 @@ using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
 using DailyDiary.Application.Users.LoginUser;
 using DailyDiary.Domain.Common;
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Moq;

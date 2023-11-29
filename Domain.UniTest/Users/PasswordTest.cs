@@ -1,4 +1,4 @@
-using DailyDiary.Domain.User;
+using DailyDiary.Domain.Users;
 using FluentAssertions;
 
 namespace Domain.UniTest.Users;
