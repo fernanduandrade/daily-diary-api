@@ -1,15 +1,23 @@
 using DailyDiary.API.Controllers.Base;
+using DailyDiary.Application.Common.Models;
+using DailyDiary.Application.Diaries.DTO;
 using DailyDiary.Application.Users.CreateUser;
+using DailyDiary.Application.Users.Dto;
 using DailyDiary.Application.Users.GetUserById;
 using DailyDiary.Application.Users.LoginUser;
+using DailyDiary.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DailyDiary.API.Controllers;
 
 public class UsersController : BaseController
 {
     [Authorize]
+    [SwaggerOperation(Summary = "Creates a user")]
+    [ProducesResponseType(typeof(ApiResponse<UserDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
     [HttpPost]
     public async Task<IActionResult> Create(CreateUserCommand command)
     {
@@ -21,8 +29,11 @@ public class UsersController : BaseController
     }
     
     [Authorize]
-    [HttpGet]
-    public async Task<IActionResult> Create([FromQuery] GetUserByIdQuery query)
+    [SwaggerOperation(Summary = "Finds a user by the id")]
+    [ProducesResponseType(typeof(ApiResponse<UserDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromRoute] GetUserByIdQuery query)
     {
         var result = await Mediator.Send(query);
 
@@ -31,6 +42,9 @@ public class UsersController : BaseController
             error => BadRequest(error));
     }
 
+    [SwaggerOperation(Summary = "Validates a user access")]
+    [ProducesResponseType(typeof(ApiResponse<UserLoggedDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginUserQuery query)
     {

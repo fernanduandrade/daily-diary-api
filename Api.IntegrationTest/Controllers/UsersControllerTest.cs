@@ -69,7 +69,8 @@ public class UsersControllerTest
     [Trait("Api", "Login User")]
     public async Task Should_ReturnUserById_WhenExists()
     {
-        var response = await _fixture.Client.GetAsync($"api/users?id=5b359013-c291-4e89-9274-877dfeb85d02");
+        Guid userId = new Guid("5b359013-c291-4e89-9274-877dfeb85d02");
+        var response = await _fixture.Client.GetAsync($"api/users/{userId}");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         string responseString = await response.Content.ReadAsStringAsync();
         var result = JsonSerializer.Deserialize<ApiResponse<UserDto>>(responseString, new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
