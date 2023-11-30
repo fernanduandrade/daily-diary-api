@@ -6,7 +6,10 @@ using DailyDiary.Domain.Users;
 using MediatR;
 using OneOf;
 
-namespace DailyDiary.Application.Users.CreateUser;
+namespace DailyDiary.Application.Users.Commands;
+
+public sealed record CreateUserCommand(string Name, string Email, string Password) 
+    : IRequest<OneOf<ApiResponse<UserDto>, Error>>;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OneOf<ApiResponse<UserDto>, Error>>
 {
@@ -15,9 +18,9 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OneOf
     
     public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
         => (_userRepository, _mapper) = (userRepository, mapper);
-    public async Task<OneOf<ApiResponse<UserDto>, Error>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<OneOf<ApiResponse<UserDto>, Error>> Handle(
+        CreateUserCommand request, CancellationToken cancellationToken)
     {
-        // TODO Adicionar validação de fluent validation
         var userExists = await _userRepository.VerifyEmail(request.Email);
         if (userExists)
             return UserErrors.InvalidEmail;

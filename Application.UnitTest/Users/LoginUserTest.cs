@@ -1,7 +1,7 @@
 using Application.UnitTest.Fixture;
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
-using DailyDiary.Application.Users.LoginUser;
+using DailyDiary.Application.Users.Queries;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Users;
 using FluentAssertions;

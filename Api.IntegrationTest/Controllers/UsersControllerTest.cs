@@ -5,9 +5,9 @@ using System.Text.Json;
 using Api.IntegrationTest.Setup;
 using DailyDiary.API;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Users.CreateUser;
+using DailyDiary.Application.Users.Commands;
 using DailyDiary.Application.Users.Dto;
-using DailyDiary.Application.Users.LoginUser;
+using DailyDiary.Application.Users.Queries;
 using DailyDiary.Domain.Common;
 using FluentAssertions;
 
@@ -22,7 +22,8 @@ public class UsersControllerTest
     {
         _fixture = fixture;
         string token = _fixture.Login().GetAwaiter().GetResult();
-        _fixture.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        _fixture.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+            "Bearer", token);
     }
 
     [Fact(DisplayName = "Should not create user when email registered")]
@@ -34,7 +35,8 @@ public class UsersControllerTest
         var response = await _fixture.Client.PostAsJsonAsync("api/users", payload);
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         string responseString = await response.Content.ReadAsStringAsync();
-        var result = JsonSerializer.Deserialize<Error>(responseString, new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
+        var result = JsonSerializer.Deserialize<Error>(responseString,
+            new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
         result.Code.Should().Be("Invalid email");
     }
     
@@ -47,7 +49,8 @@ public class UsersControllerTest
         var response = await _fixture.Client.PostAsJsonAsync("api/users", payload);
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         string responseString = await response.Content.ReadAsStringAsync();
-        var result = JsonSerializer.Deserialize<ApiResponse<UserDto>>(responseString, new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
+        var result = JsonSerializer.Deserialize<ApiResponse<UserDto>>(responseString, 
+            new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
         result.Data.Email.Should().Be("larri@tester.com");
         result.Data.Id.ToString().Should().NotBeNull();
     }
@@ -61,7 +64,8 @@ public class UsersControllerTest
         var response = await _fixture.Client.PostAsJsonAsync("api/users/login", payload);
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         string responseString = await response.Content.ReadAsStringAsync();
-        var result = JsonSerializer.Deserialize<Error>(responseString, new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
+        var result = JsonSerializer.Deserialize<Error>(responseString,
+            new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
         result.Code.Should().Be("Not Found");
     }
     
@@ -73,7 +77,8 @@ public class UsersControllerTest
         var response = await _fixture.Client.GetAsync($"api/users/{userId}");
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         string responseString = await response.Content.ReadAsStringAsync();
-        var result = JsonSerializer.Deserialize<ApiResponse<UserDto>>(responseString, new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
+        var result = JsonSerializer.Deserialize<ApiResponse<UserDto>>(responseString,
+            new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });
         result.Data.Id.Should().Be("5b359013-c291-4e89-9274-877dfeb85d02");
         result.Data.Email.Should().Be("usertest@tester.com");
     }

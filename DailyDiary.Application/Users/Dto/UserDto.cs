@@ -16,9 +16,11 @@ public sealed record UserDto : IMapFrom<User>
         profile.CreateMap<User, UserDto>()
             .ForMember(
                 dest => dest.Email,
-                map => map.MapFrom(x => x.Email.Value))
+                map => map
+                    .MapFrom(x => x.Email.Value))
             .ForMember(
                 dest => dest.Name,
-                map => map.MapFrom(x => x.Name));
+                map => map
+                    .MapFrom(x => x.Name));
     }
 }

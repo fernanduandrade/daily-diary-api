@@ -1,12 +1,19 @@
 using AutoMapper;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Diaries.DTO;
+using DailyDiary.Application.Diaries.Dto;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Diaries;
 using OneOf;
 using MediatR;
 
-namespace DailyDiary.Application.Diaries.CreateDiary;
+namespace DailyDiary.Application.Diaries.Commands;
+
+public sealed record CreateDiaryCommand(
+    Guid userId,
+    string Title,
+    string Text,
+    string Mood,
+    bool IsPublic) : IRequest<OneOf<ApiResponse<DiaryDto>, Error>>;
 
 public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, OneOf<ApiResponse<DiaryDto>, Error>>
 {
@@ -15,7 +22,8 @@ public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, One
     
     public CreateDiaryCommandHandler(IDiaryRepository diaryRepository, IMapper mapper)
         => (_diaryRepository, _mapper) = (diaryRepository, mapper);
-    public async Task<OneOf<ApiResponse<DiaryDto>, Error>> Handle(CreateDiaryCommand request, CancellationToken cancellationToken)
+    public async Task<OneOf<ApiResponse<DiaryDto>, Error>> Handle(
+        CreateDiaryCommand request, CancellationToken cancellationToken)
     {
         var hasPublishedToday = await _diaryRepository.HasPublish(request.userId);
         if (hasPublishedToday)

@@ -7,5 +7,5 @@ public interface IDiaryRepository
     Task<List<Diary>> GetAllByUserId(Guid userId);
     Task<Diary> Update(Diary diary);
     Task<Diary> GetById(Guid id);
-    void Delete(Diary diary);
+    void Delete(Guid diaryId);
 }

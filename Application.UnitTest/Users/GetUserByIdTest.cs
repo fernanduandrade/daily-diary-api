@@ -1,7 +1,7 @@
 using Application.UnitTest.Fixture;
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
-using DailyDiary.Application.Users.GetUserById;
+using DailyDiary.Application.Users.Queries;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Users;
 using FluentAssertions;
@@ -48,7 +48,8 @@ public class GetUserByIdTest
         mocker.GetMock<IUserRepository>()
             .Setup(x => x
                 .GetByIdAsync(query.Id))
-            .Returns(Task.FromResult<User>(_fixture.GenerateUser("test", "test@agotum.com", "123")));
+            .Returns(Task.FromResult<User>(_fixture
+                .GenerateUser("test", "test@agotum.com", "123")));
         // act
         var result = await getByIdHandler.Handle(query, default);
         

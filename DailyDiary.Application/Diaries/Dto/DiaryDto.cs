@@ -2,7 +2,7 @@ using AutoMapper;
 using DailyDiary.Application.Common.Mapping;
 using DailyDiary.Domain.Diaries;
 
-namespace DailyDiary.Application.Diaries.DTO;
+namespace DailyDiary.Application.Diaries.Dto;
 
 public sealed record DiaryDto : IMapFrom<Diary>
 {
@@ -11,6 +11,8 @@ public sealed record DiaryDto : IMapFrom<Diary>
     public string? Title { get; init; }
     public string? Mood { get; init; }
     public DateTime CreatedAt { get; init; }
+    public Guid UserId { get; init; }
+    public Guid Id { get; init; }
 
     public void Mapping(Profile profile)
     {

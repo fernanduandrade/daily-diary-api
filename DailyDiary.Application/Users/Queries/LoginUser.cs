@@ -6,8 +6,11 @@ using OneOf;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 
-namespace DailyDiary.Application.Users.LoginUser;
+namespace DailyDiary.Application.Users.Queries;
 
+public sealed record LoginUserQuery(string Email, string Password)
+    : IRequest<OneOf<ApiResponse<UserLoggedDto>, Error>> {}
+    
 public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, OneOf<ApiResponse<UserLoggedDto>, Error>>
 {
     private readonly IUserRepository _userRepository;
@@ -15,7 +18,8 @@ public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, OneOf<ApiRe
 
     public LoginUserQueryHandler(IUserRepository userRepository, IConfiguration configuation)
         => (_userRepository, _config) = (userRepository, configuation);
-    public async Task<OneOf<ApiResponse<UserLoggedDto>, Error>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
+    public async Task<OneOf<ApiResponse<UserLoggedDto>, Error>> Handle(
+        LoginUserQuery request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByEmail(request.Email);
         if (user is null)

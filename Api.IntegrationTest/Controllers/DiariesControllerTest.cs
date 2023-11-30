@@ -1,4 +1,3 @@
-
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -6,8 +5,8 @@ using System.Text.Json;
 using Api.IntegrationTest.Setup;
 using DailyDiary.API;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Diaries.CreateDiary;
-using DailyDiary.Application.Diaries.DTO;
+using DailyDiary.Application.Diaries.Commands;
+using DailyDiary.Application.Diaries.Dto;
 using DailyDiary.Domain.Common;
 using FluentAssertions;
 
@@ -22,7 +21,8 @@ public class DiariesControllerTest
     {
         _fixture = fixture;
         string token = _fixture.Login().GetAwaiter().GetResult();
-        _fixture.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        _fixture.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
+            token);
     }
 
     [Fact(DisplayName = "Should not be able to create more than one diary per day")]
@@ -49,7 +49,10 @@ public class DiariesControllerTest
     public async Task CreateDiary_Should_Return200()
     {
         CreateDiaryCommand payload = new(
-            new Guid("5b359013-c291-4e89-9274-877dfeb85d02"), "Things getting better", "content", "happy",
+            new Guid("5b359013-c291-4e89-9274-877dfeb85d02"),
+            "Things getting better",
+            "content",
+            "happy",
             true);
 
         var response = await _fixture.Client.PostAsJsonAsync("api/diaries", payload);
@@ -95,7 +98,7 @@ public class DiariesControllerTest
     
     [Fact(DisplayName = "Should return a diary by id")]
     [Trait("Api ", "Diary")]
-    public async Task DeleteDiary_Should_Return200()
+    public async Task GetDiaryById_Should_Return200()
     {
         Guid diaryId = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bc");
 
@@ -105,11 +108,30 @@ public class DiariesControllerTest
     
     [Fact(DisplayName = "Should return not found diary by id")]
     [Trait("Api ", "Diary")]
-    public async Task DeleteDiary_Should_Return400()
+    public async Task GetDiaryById_Should_Return400()
     {
         Guid diaryId = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bd");
 
         var response = await _fixture.Client.GetAsync($"api/diaries/{diaryId}");
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+    
+    [Fact(DisplayName = "Should update a diary id")]
+    [Trait("Api ", "Diary")]
+    public async Task UpdateDiary_Should_Return200()
+    {
+        UpdateDiaryCommand payload = new()
+        {
+            Id = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bc"),
+            UserId = new Guid("8636d1c9-e331-4da6-959f-d2133f754fda"),
+            Mood = "happy",
+            Title = "Hard",
+            Text = "great content"
+        };
+        
+
+        var response = await _fixture.Client.PutAsJsonAsync($"api/diaries", payload);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+    
 }

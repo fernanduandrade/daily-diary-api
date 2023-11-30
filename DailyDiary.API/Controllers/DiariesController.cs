@@ -1,10 +1,8 @@
 using DailyDiary.API.Controllers.Base;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Diaries.CreateDiary;
-using DailyDiary.Application.Diaries.DeleteDiary;
-using DailyDiary.Application.Diaries.DTO;
-using DailyDiary.Application.Diaries.GetDiaryById;
-using DailyDiary.Application.Diaries.GetUserDairies;
+using DailyDiary.Application.Diaries.Commands;
+using DailyDiary.Application.Diaries.Dto;
+using DailyDiary.Application.Diaries.Queries;
 using DailyDiary.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +52,19 @@ public class DiariesController : BaseController
     public async Task<IActionResult> GetById([FromRoute] GetDiaryByIdQuery query)
     {
         var result = await Mediator.Send(query);
+
+        return result.Match<IActionResult>(
+            diary => Ok(diary),
+            error => BadRequest(error));
+    }
+    
+    [SwaggerOperation(Summary = "Updates a diary")]
+    [ProducesResponseType(typeof(ApiResponse<DiaryDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
+    [HttpPut]
+    public async Task<IActionResult> Update(UpdateDiaryCommand command)
+    {
+        var result = await Mediator.Send(command);
 
         return result.Match<IActionResult>(
             diary => Ok(diary),

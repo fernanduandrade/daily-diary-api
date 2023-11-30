@@ -31,19 +31,6 @@ public class MappingProfile : Profile
             {
                 methodInfo.Invoke(instance, new object[] { this });
             }
-            else
-            {
-                var interfaces = type.GetInterfaces().Where(HasInterface).ToList();
-                if(interfaces.Count > 0 )
-                {
-                    foreach ( var @interface in interfaces)
-                    {
-                        var interfaceMethodInfo = @interface.GetMethod(mappingMethodName, argTypes);
-                        interfaceMethodInfo?.Invoke(instance, new object[] { this });
-                    }
-                    
-                }
-            }
         }
     }
 }

@@ -44,12 +44,14 @@ public class DiaryRepository : IDiaryRepository
     public async Task<Diary> GetById(Guid id)
     {
         var diary = await _context.Diaries
-            .SingleOrDefaultAsync(x => x.Id == id);
+            .AsNoTracking().
+            SingleOrDefaultAsync(x => x.Id == id);
         return diary;
     }
 
-    public void Delete(Diary diary)
+    public void Delete(Guid id)
     {
+        var diary = _context.Diaries.FirstOrDefault(x => x.Id == id);
         _context.Diaries.Remove(diary);
         _context.SaveChanges();
     }

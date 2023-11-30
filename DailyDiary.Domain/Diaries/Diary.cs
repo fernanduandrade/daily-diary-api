@@ -10,7 +10,6 @@ public class Diary : Entity
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public bool IsPublic { get; private set; }
     public string? Mood { get; private set; }
-    public virtual User User { get; private set; }
     public Guid UserId { get; private set ;}
     public static Diary Create(string title, string text, string mood, Guid userId, bool isPublic = false)
     {
