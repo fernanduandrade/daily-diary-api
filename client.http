@@ -1,0 +1,10 @@
+@routeUrl=http://localhost:5204
+
+
+POST {{routeUrl}}/api/users/login
+Content-Type: application/json
+
+{
+  "email": "onanduandrade@gmail.com",
+  "password": "Juazeiro0."
+}
