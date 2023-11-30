@@ -19,6 +19,7 @@ public static class DependecyInjection
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                 config =>
                 {
+                    config.EnableRetryOnFailure(3);
                     config.MigrationsAssembly("DailyDiary.API");
                 }));
         

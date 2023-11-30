@@ -35,15 +35,6 @@ public class AppFixture<TProgram> : IDisposable where TProgram : class
         return result.Data.Token;
     }
     
-    public User GenerateUser(string nameInput, string emailInput, string passwordInput)
-    {
-        var id = new Faker().Random.Guid();
-        Email email = Email.Create(emailInput).Value;
-        Password password = Password.Create(passwordInput).Value;
-        var user = User.Create(email, nameInput, password);
-        user.Id = id;
-        return user;
-    }
     public void Dispose()
     {
         Client.Dispose();

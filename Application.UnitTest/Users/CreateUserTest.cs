@@ -62,7 +62,7 @@ public class CreateUserTest
         result.Value.Should().BeOfType<ApiResponse<UserDto>>();
         var userResponse = result.Match(
             ok => ok,
-            error => null);
+            _ => null);
         userResponse.Data.Email.Should().Be(command.Email);
         userResponse.Data.Name.Should().Be(command.Name);
     }

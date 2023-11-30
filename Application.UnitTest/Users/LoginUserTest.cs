@@ -55,7 +55,7 @@ public class LoginUserTest
         // assert
         result.Value.Should().BeOfType<Error>();
         var value = result.Match(
-            ok => "",
+            _ => "",
             error => error.Code);
         value.Should().Be("Not Found");
     }
@@ -89,7 +89,7 @@ public class LoginUserTest
         result.Value.Should().BeOfType<ApiResponse<UserLoggedDto>>();
         var value = result.Match(
             ok => ok,
-            error => null);
+            _ => null);
         value.Data.Token.Should().NotBeNull();
         value.Message.Should().Be("OK");
         value.Success.Should().Be(true);

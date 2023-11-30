@@ -54,7 +54,7 @@ public class ApiFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifet
         await _dbContainer.StartAsync();
     }
 
-    public async Task DisposeAsync()
+    public new async Task DisposeAsync()
     {
         await _dbContainer.DisposeAsync();
     }
