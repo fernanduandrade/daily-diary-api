@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7717C4B4-1375-4F7E-9048-B10CA363C498}"
+	ProjectSection(SolutionItems) = preProject
+		client.http = client.http
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{073739C0-9F6A-4861-982E-EAF8E1285091}"
 EndProject
