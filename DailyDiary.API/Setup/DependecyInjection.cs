@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
+using Serilog.Exceptions;
+using Serilog.Filters;
 
 namespace DailyDiary.API.Setup;
 
@@ -48,6 +53,28 @@ public static class DependecyInjection
                     new string[] {}
                 }
             });
+        });
+
+        return services;
+    }
+    
+    public static void ConfigureLog(this IConfiguration configuration)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .Enrich.WithExceptionDetails()
+            .WriteTo.Debug()
+            .WriteTo.Console()
+            .CreateLogger();
+    }
+
+    public static IServiceCollection AddBehaviour(this IServiceCollection services)
+    {
+        services.AddHttpContextAccessor();
+
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
         });
 
         return services;

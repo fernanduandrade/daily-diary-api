@@ -1,9 +1,8 @@
-using System.Text;
+using DailyDiary.API.Middlewares;
 using DailyDiary.API.Setup;
 using DailyDiary.Application;
 using DailyDiary.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
 namespace DailyDiary.API
 {
@@ -21,9 +20,12 @@ namespace DailyDiary.API
             builder.Services.AddPersistence();
             builder.Services.AddInfraDependecies(configuration);
             builder.Services.AddHealthChecks();
+            builder.Services.AddBehaviour();
             builder.Services.AddAuth(configuration);
             builder.Services.AddSwagger();
-
+            builder.Configuration.ConfigureLog();
+            builder.Host.UseSerilog(Log.Logger);
+            
             #endregion
 
             #region app
@@ -38,7 +40,7 @@ namespace DailyDiary.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.MapControllers();
             app.MapHealthChecks("/_health");
             app.Run();

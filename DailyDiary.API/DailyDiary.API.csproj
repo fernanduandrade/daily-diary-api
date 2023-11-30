@@ -26,8 +26,4 @@
       <ProjectReference Include="..\DailyDiary.Infrastructure\DailyDiary.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Middlewares\" />
-    </ItemGroup>
-
 </Project>
