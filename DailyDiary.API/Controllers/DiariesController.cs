@@ -22,7 +22,7 @@ public class DiariesController : BaseController
         var result = await Mediator.Send(command);
 
         return result.Match<IActionResult>(
-            diary => Ok(diary),
+            diary => Created($"api/diaries/{diary.Data.Id}", diary),
             error => BadRequest(error));
     }
 

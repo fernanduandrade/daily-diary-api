@@ -3,9 +3,9 @@ namespace DailyDiary.Domain.Diaries;
 public interface IDiaryRepository
 {
     Task<bool> HasPublish(Guid userId);
-    Task<Diary> AddAsync(Diary diary);
+    Task AddAsync(Diary diary);
     Task<List<Diary>> GetAllByUserId(Guid userId);
-    Diary Update(Diary diary);
+    void Update(Diary diary);
     Task<Diary> GetById(Guid id);
-    void Delete(Guid diaryId);
+    Task Delete(Guid diaryId);
 }

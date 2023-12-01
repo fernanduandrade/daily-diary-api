@@ -10,7 +10,9 @@ public abstract class Entity
     
     [NotMapped]
     public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
-    
+
+    public void ClearDomainEvents()
+        => _domainEvents.Clear();
     public void Raise(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);

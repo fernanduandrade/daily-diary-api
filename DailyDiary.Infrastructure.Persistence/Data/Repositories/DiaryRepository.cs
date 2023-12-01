@@ -17,11 +17,8 @@ public class DiaryRepository : IDiaryRepository
         return hasPublish is not null;
     }
 
-    public async Task<Diary> AddAsync(Diary diary)
-    {
-        await _context.Diaries.AddAsync(diary);
-        return diary;
-    }
+    public async Task AddAsync(Diary diary)
+     => await _context.Diaries.AddAsync(diary);
 
     public async Task<List<Diary>> GetAllByUserId(Guid userId)
     {
@@ -33,11 +30,7 @@ public class DiaryRepository : IDiaryRepository
         return diaries;
     }
 
-    public Diary Update(Diary diary)
-    {
-        _context.Diaries.Update(diary);
-        return diary;
-    }
+    public void Update(Diary diary) => _context.Diaries.Update(diary);
 
     public async Task<Diary> GetById(Guid id)
     {
@@ -47,9 +40,9 @@ public class DiaryRepository : IDiaryRepository
         return diary;
     }
 
-    public void Delete(Guid id)
+    public async Task Delete(Guid id)
     {
-        var diary = _context.Diaries.FirstOrDefault(x => x.Id == id);
+        var diary = await _context.Diaries.FirstOrDefaultAsync(x => x.Id == id);
         _context.Diaries.Remove(diary);
     }
 }

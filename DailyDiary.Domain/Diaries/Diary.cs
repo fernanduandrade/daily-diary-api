@@ -3,7 +3,7 @@ using DailyDiary.Domain.Users;
 
 namespace DailyDiary.Domain.Diaries;
 
-public class Diary : Entity
+public class Diary : Entity, IAggregateRoot
 {
     public string? Title { get; private set; }
     public string? Text { get; private set; }
@@ -15,6 +15,7 @@ public class Diary : Entity
     {
         var diary = new Diary()
         {
+            Id = new Guid(),
             Title = title,
             Text = text,
             Mood = mood,

@@ -46,7 +46,7 @@ public class DiariesControllerTest
     
     [Fact(DisplayName = "Should create a diary")]
     [Trait("Api ", "Diary")]
-    public async Task CreateDiary_Should_Return200()
+    public async Task CreateDiary_Should_Return201()
     {
         CreateDiaryCommand payload = new(
             new Guid("5b359013-c291-4e89-9274-877dfeb85d02"),
@@ -58,7 +58,7 @@ public class DiariesControllerTest
         var response = await _fixture.Client.PostAsJsonAsync("api/diaries", payload);
         string responseString = await response.Content.ReadAsStringAsync();
 
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.StatusCode.Should().Be(HttpStatusCode.Created);
 
         var result = JsonSerializer.Deserialize<ApiResponse<DiaryDto>>(responseString,
             new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });

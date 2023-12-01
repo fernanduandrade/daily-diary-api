@@ -32,9 +32,9 @@ public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, One
             return DiaryErrors.InvalidDate;
 
         var diary = Diary.Create(request.Title, request.Text, request.Mood, request.userId ,request.IsPublic);
-        Diary entity = await _diaryRepository.AddAsync(diary);
+        await _diaryRepository.AddAsync(diary);
         await _unitOfWork.Commit(cancellationToken);
-        var dto = _mapper.Map<DiaryDto>(entity);
+        var dto = _mapper.Map<DiaryDto>(diary);
 
         return new ApiResponse<DiaryDto>() { Data = dto, Message = "OK", Success = true };
     }

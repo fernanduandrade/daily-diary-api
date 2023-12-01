@@ -23,17 +23,17 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OneOf
     public async Task<OneOf<ApiResponse<UserDto>, Error>> Handle(
         CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var userExists = await _userRepository.VerifyEmail(request.Email);
-        if (userExists)
+        var emailExists = await _userRepository.GetByEmail(request.Email);
+        if (emailExists is not null)
             return UserErrors.InvalidEmail;
         
         var email = Email.Create(request.Email).Value;
         var password = Password.Create(request.Password).Value;
         var user = User.Create(email, request.Name, password);
 
-        var entity = await _userRepository.AddAsync(user);
+        await _userRepository.AddAsync(user);
         await _unitOfWork.Commit(cancellationToken);
-        var dto = _mapper.Map<UserDto>(entity);
+        var dto = _mapper.Map<UserDto>(user);
         
         return new ApiResponse<UserDto>() { Data = dto, Message = "OK", Success = true};
     }

@@ -42,12 +42,12 @@ public class UsersControllerTest
     
     [Fact(DisplayName = "Should not create user when email registered")]
     [Trait("Api", "User")]
-    public async Task Should_CreateUser()
+    public async Task CreateUser_Should_201()
     {
         
         CreateUserCommand payload = new("Lari", "larri@tester.com", "testpassword123");
         var response = await _fixture.Client.PostAsJsonAsync("api/users", payload);
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.StatusCode.Should().Be(HttpStatusCode.Created);
         string responseString = await response.Content.ReadAsStringAsync();
         var result = JsonSerializer.Deserialize<ApiResponse<UserDto>>(responseString, 
             new JsonSerializerOptions() {  PropertyNameCaseInsensitive = true });

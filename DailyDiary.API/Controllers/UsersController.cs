@@ -22,7 +22,7 @@ public class UsersController : BaseController
         var result = await Mediator.Send(command);
 
         return result.Match<IActionResult>(
-            user => Ok(user),
+            user => Created($"api/users/{user.Data.Id}", user),
             error => BadRequest(error));
     }
     

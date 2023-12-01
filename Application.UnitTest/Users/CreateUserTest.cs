@@ -27,9 +27,10 @@ public class CreateUserTest
         // arrange
         var command = new CreateUserCommand("Alicia", "alicia@tester.com", "teste123") ;
         var mocker = new AutoMocker();
+        var user = _fixture.GenerateUser(command.Name, command.Email, command.Password);
         var createUserHandler = mocker.CreateInstance<CreateUserCommandHandler>();
         mocker.GetMock<IUserRepository>()
-            .Setup(x => x.VerifyEmail(command.Email)).Returns(Task.FromResult(true));
+            .Setup(x => x.GetByEmail(command.Email)).Returns(Task.FromResult(user));
         
         // act
         var result = await createUserHandler.Handle(command, default);
@@ -48,7 +49,7 @@ public class CreateUserTest
         var mocker = new AutoMocker();
         var createUserHandler = mocker.CreateInstance<CreateUserCommandHandler>();
         mocker.GetMock<IUserRepository>()
-            .Setup(x => x.VerifyEmail(command.Email)).Returns(Task.FromResult(false));
+            .Setup(x => x.GetByEmail(command.Email)).Returns(Task.FromResult(It.IsAny<User>()));
         mocker.GetMock<IUserRepository>()
             .Setup(x => x
                 .AddAsync(user)).Returns(Task.FromResult(user));

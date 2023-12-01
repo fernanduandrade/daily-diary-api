@@ -3,7 +3,7 @@ using DailyDiary.Domain.Diaries;
 
 namespace DailyDiary.Domain.Users;
 
-public class User : Entity
+public class User : Entity, IAggregateRoot
 {
     public Email? Email { get; private set; }
     public Password? Password { get; private set; }

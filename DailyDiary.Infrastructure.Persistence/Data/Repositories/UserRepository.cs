@@ -15,16 +15,9 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<User> AddAsync(User user)
+    public async Task AddAsync(User user)
     {
         await _context.Users.AddAsync(user);
-        return user;
-    }
-
-    public async Task<bool> VerifyEmail(string email)
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.Value == email);
-        return user is not null;
     }
 
     public async Task<User>? GetByEmail(string email)
