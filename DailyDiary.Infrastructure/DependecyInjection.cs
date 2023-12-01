@@ -1,6 +1,8 @@
 using System.Text;
+using DailyDiary.Application.Common.Interfaces;
 using DailyDiary.Domain.Diaries;
 using DailyDiary.Domain.Users;
+using DailyDiary.Infrastructure.Persistence.Common;
 using DailyDiary.Infrastructure.Persistence.Data;
 using DailyDiary.Infrastructure.Persistence.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -28,6 +30,7 @@ public static class DependecyInjection
     
     public static IServiceCollection AddPersistence(this IServiceCollection services)
     {
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IDiaryRepository, DiaryRepository>();
         return services;

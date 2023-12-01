@@ -19,8 +19,7 @@ public class DiaryRepository : IDiaryRepository
 
     public async Task<Diary> AddAsync(Diary diary)
     {
-        _context.Diaries.Add(diary);
-        await _context.SaveChangesAsync();
+        await _context.Diaries.AddAsync(diary);
         return diary;
     }
 
@@ -34,10 +33,9 @@ public class DiaryRepository : IDiaryRepository
         return diaries;
     }
 
-    public async Task<Diary> Update(Diary diary)
+    public Diary Update(Diary diary)
     {
         _context.Diaries.Update(diary);
-        await _context.SaveChangesAsync();
         return diary;
     }
 
@@ -53,6 +51,5 @@ public class DiaryRepository : IDiaryRepository
     {
         var diary = _context.Diaries.FirstOrDefault(x => x.Id == id);
         _context.Diaries.Remove(diary);
-        _context.SaveChanges();
     }
 }

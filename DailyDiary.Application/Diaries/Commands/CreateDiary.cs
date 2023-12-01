@@ -1,4 +1,5 @@
 using AutoMapper;
+using DailyDiary.Application.Common.Interfaces;
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Diaries.Dto;
 using DailyDiary.Domain.Common;
@@ -19,9 +20,10 @@ public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, One
 {
     private readonly IDiaryRepository _diaryRepository;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
     
-    public CreateDiaryCommandHandler(IDiaryRepository diaryRepository, IMapper mapper)
-        => (_diaryRepository, _mapper) = (diaryRepository, mapper);
+    public CreateDiaryCommandHandler(IDiaryRepository diaryRepository, IMapper mapper, IUnitOfWork unitOfWork)
+        => (_diaryRepository, _mapper, _unitOfWork) = (diaryRepository, mapper, unitOfWork);
     public async Task<OneOf<ApiResponse<DiaryDto>, Error>> Handle(
         CreateDiaryCommand request, CancellationToken cancellationToken)
     {
@@ -31,6 +33,7 @@ public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, One
 
         var diary = Diary.Create(request.Title, request.Text, request.Mood, request.userId ,request.IsPublic);
         Diary entity = await _diaryRepository.AddAsync(diary);
+        await _unitOfWork.Commit(cancellationToken);
         var dto = _mapper.Map<DiaryDto>(entity);
 
         return new ApiResponse<DiaryDto>() { Data = dto, Message = "OK", Success = true };

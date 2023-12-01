@@ -1,4 +1,5 @@
 using AutoMapper;
+using DailyDiary.Application.Common.Interfaces;
 using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
 using DailyDiary.Domain.Common;
@@ -15,9 +16,10 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OneOf
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
     
-    public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
-        => (_userRepository, _mapper) = (userRepository, mapper);
+    public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper, IUnitOfWork unitOfWork)
+        => (_userRepository, _mapper, _unitOfWork) = (userRepository, mapper, unitOfWork);
     public async Task<OneOf<ApiResponse<UserDto>, Error>> Handle(
         CreateUserCommand request, CancellationToken cancellationToken)
     {
@@ -30,6 +32,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OneOf
         var user = User.Create(email, request.Name, password);
 
         var entity = await _userRepository.AddAsync(user);
+        await _unitOfWork.Commit(cancellationToken);
         var dto = _mapper.Map<UserDto>(entity);
         
         return new ApiResponse<UserDto>() { Data = dto, Message = "OK", Success = true};

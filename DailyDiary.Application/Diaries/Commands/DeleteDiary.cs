@@ -1,3 +1,4 @@
+using DailyDiary.Application.Common.Interfaces;
 using DailyDiary.Domain.Diaries;
 using MediatR;
 
@@ -8,11 +9,13 @@ public sealed record DeleteDiaryCommand(Guid Id) : IRequest<Unit>;
 public class DeleteDiaryCommandHandler : IRequestHandler<DeleteDiaryCommand, Unit>
 {
     private readonly IDiaryRepository _diaryRepository;
-    public DeleteDiaryCommandHandler(IDiaryRepository diaryRepository)
-        => (_diaryRepository) = (diaryRepository);
-    public Task<Unit> Handle(DeleteDiaryCommand request, CancellationToken cancellationToken)
+    private readonly IUnitOfWork _unitOfWork;
+    public DeleteDiaryCommandHandler(IDiaryRepository diaryRepository, IUnitOfWork unitOfWork)
+        => (_diaryRepository, _unitOfWork) = (diaryRepository, unitOfWork);
+    public async Task<Unit> Handle(DeleteDiaryCommand request, CancellationToken cancellationToken)
     {
         _diaryRepository.Delete(request.Id);
-        return Task.FromResult(Unit.Value);
+        await _unitOfWork.Commit(cancellationToken);
+        return Unit.Value;
     }
 }
