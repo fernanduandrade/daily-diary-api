@@ -1,6 +1,8 @@
+using DailyDiary.Domain.Common;
+
 namespace DailyDiary.Domain.Diaries;
 
-public interface IDiaryRepository
+public interface IDiaryRepository : IRepository<Diary>
 {
     Task<bool> HasPublish(Guid userId);
     Task AddAsync(Diary diary);
