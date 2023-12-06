@@ -64,6 +64,7 @@ public class CreateUserTest
         var userResponse = result.Match(
             ok => ok,
             _ => null);
+        userResponse.Should().NotBeNull();
         userResponse.Data.Email.Should().Be(command.Email);
         userResponse.Data.Name.Should().Be(command.Name);
     }

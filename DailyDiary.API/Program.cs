@@ -43,6 +43,11 @@ namespace DailyDiary.API
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.MapControllers();
             app.MapHealthChecks("/_health");
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
             app.Run();
 
 
