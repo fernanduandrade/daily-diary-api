@@ -12,7 +12,6 @@ namespace DailyDiary.API.Controllers;
 
 public class UsersController : BaseController
 {
-    [Authorize]
     [SwaggerOperation(Summary = "Creates a user")]
     [ProducesResponseType(typeof(ApiResponse<UserDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]

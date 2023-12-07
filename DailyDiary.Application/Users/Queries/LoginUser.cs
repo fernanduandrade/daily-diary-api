@@ -31,7 +31,7 @@ public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, OneOf<ApiRe
             return UserErrors.NotFound;
 
         string token = Token.Create(_config);
-        UserLoggedDto dto = new(user.Name, request.Email, token);
+        UserLoggedDto dto = new(user.Id, user.Name, request.Email, token);
 
         return new ApiResponse<UserLoggedDto>() { Data = dto, Message = "OK", Success = true };
     }
