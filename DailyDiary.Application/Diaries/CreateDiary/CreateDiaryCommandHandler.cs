@@ -4,17 +4,10 @@ using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Diaries.Dto;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Diaries;
-using OneOf;
 using MediatR;
+using OneOf;
 
-namespace DailyDiary.Application.Diaries.Commands;
-
-public sealed record CreateDiaryCommand(
-    Guid userId,
-    string Title,
-    string Text,
-    string Mood,
-    bool IsPublic) : IRequest<OneOf<ApiResponse<DiaryDto>, Error>>;
+namespace DailyDiary.Application.Diaries.CreateDiary;
 
 public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, OneOf<ApiResponse<DiaryDto>, Error>>
 {

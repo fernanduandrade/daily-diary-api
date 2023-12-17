@@ -6,9 +6,7 @@ using DailyDiary.Domain.Diaries;
 using MediatR;
 using OneOf;
 
-namespace DailyDiary.Application.Diaries.Queries;
-
-public sealed record GetDiaryByIdQuery(Guid Id) : IRequest<OneOf<ApiResponse<DiaryDto>, Error>>;
+namespace DailyDiary.Application.Diaries.GetDiaryById;
 
 public class GetDiaryByIdQueryHandler : IRequestHandler<GetDiaryByIdQuery, OneOf<ApiResponse<DiaryDto>, Error>>
 {

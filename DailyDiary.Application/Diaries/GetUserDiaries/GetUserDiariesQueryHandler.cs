@@ -4,9 +4,7 @@ using DailyDiary.Application.Diaries.Dto;
 using DailyDiary.Domain.Diaries;
 using MediatR;
 
-namespace DailyDiary.Application.Diaries.Queries;
-
-public sealed record GetUserDiariesQuery(Guid userId) : IRequest<ApiResponse<List<DiaryDto>>>;
+namespace DailyDiary.Application.Diaries.GetUserDiaries;
 
 public class GetUserDiariesQueryHandler : IRequestHandler<GetUserDiariesQuery, ApiResponse<List<DiaryDto>>>
 {

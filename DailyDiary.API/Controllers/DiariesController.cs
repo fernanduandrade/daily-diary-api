@@ -1,8 +1,11 @@
 using DailyDiary.API.Controllers.Base;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Diaries.Commands;
+using DailyDiary.Application.Diaries.CreateDiary;
+using DailyDiary.Application.Diaries.DeleteDiary;
 using DailyDiary.Application.Diaries.Dto;
-using DailyDiary.Application.Diaries.Queries;
+using DailyDiary.Application.Diaries.GetDiaryById;
+using DailyDiary.Application.Diaries.GetUserDiaries;
+using DailyDiary.Application.Diaries.UpdateDiary;
 using DailyDiary.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

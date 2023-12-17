@@ -2,15 +2,11 @@ using DailyDiary.Application.Common.Models;
 using DailyDiary.Application.Users.Dto;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Users;
-using OneOf;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using OneOf;
+namespace DailyDiary.Application.Users.LoginUserQuery;
 
-namespace DailyDiary.Application.Users.Queries;
-
-public sealed record LoginUserQuery(string Email, string Password)
-    : IRequest<OneOf<ApiResponse<UserLoggedDto>, Error>> {}
-    
 public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, OneOf<ApiResponse<UserLoggedDto>, Error>>
 {
     private readonly IUserRepository _userRepository;

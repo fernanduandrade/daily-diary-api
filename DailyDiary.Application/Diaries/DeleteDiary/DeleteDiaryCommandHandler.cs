@@ -2,9 +2,7 @@ using DailyDiary.Application.Common.Interfaces;
 using DailyDiary.Domain.Diaries;
 using MediatR;
 
-namespace DailyDiary.Application.Diaries.Commands;
-
-public sealed record DeleteDiaryCommand(Guid Id) : IRequest<Unit>;
+namespace DailyDiary.Application.Diaries.DeleteDiary;
 
 public class DeleteDiaryCommandHandler : IRequestHandler<DeleteDiaryCommand, Unit>
 {

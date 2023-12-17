@@ -5,8 +5,9 @@ using System.Text.Json;
 using Api.IntegrationTest.Setup;
 using DailyDiary.API;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Diaries.Commands;
+using DailyDiary.Application.Diaries.CreateDiary;
 using DailyDiary.Application.Diaries.Dto;
+using DailyDiary.Application.Diaries.UpdateDiary;
 using DailyDiary.Domain.Common;
 using FluentAssertions;
 

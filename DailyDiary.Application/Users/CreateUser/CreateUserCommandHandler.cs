@@ -7,10 +7,7 @@ using DailyDiary.Domain.Users;
 using MediatR;
 using OneOf;
 
-namespace DailyDiary.Application.Users.Commands;
-
-public sealed record CreateUserCommand(string Name, string Email, string Password) 
-    : IRequest<OneOf<ApiResponse<UserDto>, Error>>;
+namespace DailyDiary.Application.Users.CreateUser;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OneOf<ApiResponse<UserDto>, Error>>
 {
