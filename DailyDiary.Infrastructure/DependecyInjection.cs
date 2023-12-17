@@ -1,6 +1,7 @@
 using System.Text;
 using DailyDiary.Application.Common.Interfaces;
 using DailyDiary.Domain.Diaries;
+using DailyDiary.Domain.Likes;
 using DailyDiary.Domain.Users;
 using DailyDiary.Infrastructure.Persistence.Common;
 using DailyDiary.Infrastructure.Persistence.Data;
@@ -33,6 +34,7 @@ public static class DependecyInjection
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IDiaryRepository, DiaryRepository>();
+        services.AddScoped<ILikeRepository, LikeRepository>();
         return services;
     }
 

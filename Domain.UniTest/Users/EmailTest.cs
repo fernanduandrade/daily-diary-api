@@ -32,7 +32,7 @@ public class EmailTest
         {
             _ = Email.Create("").Value;
         };
-
+        
         // assert
         action.Should().Throw<InvalidOperationException>();
     }

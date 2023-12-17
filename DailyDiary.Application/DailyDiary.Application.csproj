@@ -29,6 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\Behaviours\" />
-    <Folder Include="Likes\" />
+    <Folder Include="Likes\Dto\" />
   </ItemGroup>
 </Project>
