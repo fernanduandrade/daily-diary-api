@@ -15,7 +15,7 @@ public static class Token
         var _audience = config["Jwt:Audience"];
 
         var signinCredentials = new SigningCredentials(_secretKey, SecurityAlgorithms.HmacSha256);
-
+        
         var tokeOptions = new JwtSecurityToken(
             issuer: _issuer,
             audience: _audience,

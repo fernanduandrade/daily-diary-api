@@ -13,6 +13,7 @@ public sealed record DiaryDto : IMapFrom<Diary>
     public DateTime CreatedAt { get; init; }
     public Guid UserId { get; init; }
     public Guid Id { get; init; }
+    public bool IsLiked { get; init; }
 
     public void Mapping(Profile profile)
     {

@@ -5,6 +5,7 @@ using DailyDiary.Application.Diaries.DeleteDiary;
 using DailyDiary.Application.Diaries.Dto;
 using DailyDiary.Application.Diaries.GetDiaryById;
 using DailyDiary.Application.Diaries.GetUserDiaries;
+using DailyDiary.Application.Diaries.SearchPublicDiaries;
 using DailyDiary.Application.Diaries.UpdateDiary;
 using DailyDiary.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
@@ -71,6 +72,19 @@ public class DiariesController : BaseController
 
         return result.Match<IActionResult>(
             diary => Ok(diary),
+            error => BadRequest(error));
+    }
+    
+    [SwaggerOperation(Summary = "Search for public diaries of others users")]
+    [ProducesResponseType(typeof(ApiResponse<DiaryDto[]>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
+    [HttpGet]
+    public async Task<IActionResult> SearchPublicDiary(SearchPublicDiariesQuery query)
+    {
+        var result = await Mediator.Send(query);
+
+        return result.Match<IActionResult>(
+            diaries => Ok(diaries),
             error => BadRequest(error));
     }
     
