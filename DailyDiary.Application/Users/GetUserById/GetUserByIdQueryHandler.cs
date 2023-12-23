@@ -1,6 +1,6 @@
 using AutoMapper;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Users.Dto;
+using DailyDiary.Application.Shared.Dto;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Users;
 using MediatR;

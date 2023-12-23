@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using DailyDiary.Domain.Diaries;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,12 +46,20 @@ public class DiaryRepository : IDiaryRepository
         _context.Diaries.Remove(diary);
     }
 
-    public async Task<List<Diary>> GetPublics()
+    public async Task<List<Diary>> GetPublics(string search)
     {
-        var publicDiaries = await _context.Diaries.Where(x => x.IsPublic)
-            .AsNoTracking()
-            .ToListAsync();
+        var query = _context.Diaries
+            .Where(x => x.IsPublic)
 
+        if (!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(x => x.Text.ToLower().Contains(search.ToLower()));
+        }
+
+        var publicDiaries = await query
+            .Include(x => x.User)
+            .ToListAsync();
+        
         return publicDiaries;
     }
 }

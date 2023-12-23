@@ -1,8 +1,8 @@
 using Application.UnitTest.Fixture;
 using AutoMapper;
 using DailyDiary.Application.Common.Models;
+using DailyDiary.Application.Shared.Dto;
 using DailyDiary.Application.Users.CreateUser;
-using DailyDiary.Application.Users.Dto;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Users;
 using FluentAssertions;

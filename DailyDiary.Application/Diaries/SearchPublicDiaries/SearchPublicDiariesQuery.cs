@@ -6,4 +6,4 @@ using OneOf;
 
 namespace DailyDiary.Application.Diaries.SearchPublicDiaries;
 
-public sealed record SearchPublicDiariesQuery(Guid userId) : IRequest<OneOf<ApiResponse<DiaryDto[]>, Error>>;
+public sealed record SearchPublicDiariesQuery(Guid userId, string Search) : IRequest<OneOf<ApiResponse<List<DiaryDto>>, Error>>;

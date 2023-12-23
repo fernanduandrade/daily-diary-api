@@ -1,7 +1,7 @@
 using AutoMapper;
 using Bogus;
 using DailyDiary.Application.Common.Mapping;
-using DailyDiary.Application.Users.Dto;
+using DailyDiary.Application.Shared.Dto;
 using DailyDiary.Domain.Users;
 using Xunit;
 

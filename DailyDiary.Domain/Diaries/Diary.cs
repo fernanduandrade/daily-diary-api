@@ -10,6 +10,7 @@ public class Diary : Entity, IAggregateRoot
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public bool IsPublic { get; private set; }
     public string? Mood { get; private set; }
+    public User User { get; }
     public Guid UserId { get; private set ;}
     public static Diary Create(string title, string text, string mood, Guid userId, bool isPublic = false)
     {

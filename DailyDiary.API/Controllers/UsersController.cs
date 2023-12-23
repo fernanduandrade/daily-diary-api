@@ -1,5 +1,6 @@
 using DailyDiary.API.Controllers.Base;
 using DailyDiary.Application.Common.Models;
+using DailyDiary.Application.Shared.Dto;
 using DailyDiary.Application.Users.CreateUser;
 using DailyDiary.Application.Users.Dto;
 using DailyDiary.Application.Users.GetUserById;

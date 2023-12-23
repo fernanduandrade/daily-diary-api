@@ -10,5 +10,5 @@ public interface IDiaryRepository : IRepository<Diary>
     void Update(Diary diary);
     Task<Diary> GetById(Guid id);
     Task Delete(Guid diaryId);
-    Task<List<Diary>> GetPublics();
+    Task<List<Diary>> GetPublics(string search);
 }

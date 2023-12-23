@@ -78,8 +78,8 @@ public class DiariesController : BaseController
     [SwaggerOperation(Summary = "Search for public diaries of others users")]
     [ProducesResponseType(typeof(ApiResponse<DiaryDto[]>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
-    [HttpGet]
-    public async Task<IActionResult> SearchPublicDiary(SearchPublicDiariesQuery query)
+    [HttpGet("get-public")]
+    public async Task<IActionResult> SearchPublicDiary([FromQuery] SearchPublicDiariesQuery query)
     {
         var result = await Mediator.Send(query);
 

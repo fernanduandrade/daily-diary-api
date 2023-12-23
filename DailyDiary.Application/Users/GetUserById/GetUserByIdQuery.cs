@@ -1,5 +1,5 @@
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Users.Dto;
+using DailyDiary.Application.Shared.Dto;
 using DailyDiary.Domain.Common;
 using MediatR;
 using OneOf;

@@ -2,7 +2,7 @@ using AutoMapper;
 using DailyDiary.Application.Common.Mapping;
 using DailyDiary.Domain.Users;
 
-namespace DailyDiary.Application.Users.Dto;
+namespace DailyDiary.Application.Shared.Dto;
 
 
 public sealed record UserDto : IMapFrom<User>

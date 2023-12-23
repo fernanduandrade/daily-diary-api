@@ -18,5 +18,8 @@ public class DiaryConfiguration : IEntityTypeConfiguration<Diary>
         builder.Property(x => x.Text).HasColumnName("text");
         builder.Property(x => x.IsPublic).HasColumnName("is_public");
         builder.Property(x => x.Mood).HasColumnName("mood");
+        builder.HasOne((x => x.User))
+            .WithOne()
+            .HasForeignKey<Diary>(d => d.UserId);
     }
 }

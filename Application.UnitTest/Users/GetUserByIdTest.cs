@@ -1,6 +1,6 @@
 using Application.UnitTest.Fixture;
 using DailyDiary.Application.Common.Models;
-using DailyDiary.Application.Users.Dto;
+using DailyDiary.Application.Shared.Dto;
 using DailyDiary.Application.Users.GetUserById;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Users;
