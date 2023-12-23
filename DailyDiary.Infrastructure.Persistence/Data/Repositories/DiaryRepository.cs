@@ -49,7 +49,7 @@ public class DiaryRepository : IDiaryRepository
     public async Task<List<Diary>> GetPublics(string search)
     {
         var query = _context.Diaries
-            .Where(x => x.IsPublic)
+            .Where(x => x.IsPublic);
 
         if (!string.IsNullOrEmpty(search))
         {
