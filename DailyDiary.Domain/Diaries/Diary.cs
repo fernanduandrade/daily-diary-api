@@ -1,4 +1,5 @@
 using DailyDiary.Domain.Common;
+using DailyDiary.Domain.DiaryLikes.Events;
 using DailyDiary.Domain.Users;
 
 namespace DailyDiary.Domain.Diaries;
@@ -25,6 +26,11 @@ public class Diary : Entity, IAggregateRoot
         };
 
         return diary;
+    }
+    
+    public void CreateDiaryLike(Guid diaryId)
+    {
+        Raise(new CreateDiaryLikesEvent(diaryId));
     }
 }
 

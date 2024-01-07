@@ -1,23 +1,19 @@
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Diaries;
-using DailyDiary.Domain.Users;
 
-namespace DailyDiary.Domain.Likes;
+namespace DailyDiary.Domain.DiaryLikes;
 
-public class Like : Entity ,IAggregateRoot
+public class DiaryLike : Entity ,IAggregateRoot
 {
-    public virtual User User { get; }
-    public Guid UserId { get; private set; }
     public virtual Diary Diary { get; }
     public Guid DiaryId { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 
-    public static Like Create(Guid useId, Guid diaryId)
+    public static DiaryLike Create(Guid diaryId)
     {
-        Like like = new()
+        DiaryLike like = new()
         {
             Id = Guid.NewGuid(),
-            UserId = useId,
             DiaryId = diaryId
         };
 
