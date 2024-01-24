@@ -23,8 +23,10 @@ public class DiaryRepository : IDiaryRepository
     public async Task<List<Diary>> GetAllByUserId(Guid userId)
     {
         var diaries = await _context.Diaries
-            .Where(x => x.UserId == userId)
             .AsNoTracking()
+            .Include(x => x.UserLike)
+            .Include(x => x.LikeCounter)
+            .Where(x => x.UserId == userId)
             .ToListAsync();
 
         return diaries;

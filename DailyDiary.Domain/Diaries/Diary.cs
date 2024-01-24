@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using DailyDiary.Domain.Common;
-using DailyDiary.Domain.DiaryLikes.Events;
+using DailyDiary.Domain.LikesCounter;
+using DailyDiary.Domain.LikesCounter.Events;
+using DailyDiary.Domain.UserLikes;
 using DailyDiary.Domain.Users;
 
 namespace DailyDiary.Domain.Diaries;
@@ -13,6 +16,12 @@ public class Diary : Entity, IAggregateRoot
     public string? Mood { get; private set; }
     public User User { get; }
     public Guid UserId { get; private set ;}
+    
+    public LikeCounter LikeCounter { get; }
+    public UserLike UserLike { get; }
+
+    [NotMapped] public bool IsFavorited => UserLike != null;
+    
     public static Diary Create(string title, string text, string mood, Guid userId, bool isPublic = false)
     {
         var diary = new Diary()
@@ -28,7 +37,7 @@ public class Diary : Entity, IAggregateRoot
         return diary;
     }
     
-    public void CreateDiaryLike(Guid diaryId)
+    public void CreateDiaryLikeCounter(Guid diaryId)
     {
         Raise(new CreateDiaryLikesEvent(diaryId));
     }

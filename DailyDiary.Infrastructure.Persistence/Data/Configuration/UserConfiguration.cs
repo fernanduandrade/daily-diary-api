@@ -1,3 +1,4 @@
+using DailyDiary.Domain.Diaries;
 using DailyDiary.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -19,5 +20,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .Property(x => x.Value).HasColumnName("email");
         builder.OwnsOne(x => x.Password)
             .Property(x => x.Value).HasColumnName("password");
+        
     }
 }

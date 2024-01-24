@@ -1,20 +1,21 @@
 using DailyDiary.Domain.Common;
-using DailyDiary.Domain.DiaryLikes;
+using DailyDiary.Domain.Diaries;
+
 namespace DailyDiary.Domain.LikesCounter;
 
 public class LikeCounter : Entity ,IAggregateRoot
 {
-    public virtual DiaryLike DiaryLike { get; }
-    public Guid DiaryLikeId { get; private set; }
     public int Counter { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+    public virtual Diary Diary { get; private set; }
+    public Guid DiaryId { get; private set; }
 
-    public static LikeCounter Create(Guid likeId)
+    public static LikeCounter Create(Guid diaryId)
     {
         LikeCounter likeCounter = new()
         {
             Id = Guid.NewGuid(),
-            DiaryLikeId = likeId,
+            DiaryId = diaryId,
             Counter = 0,
         };
 

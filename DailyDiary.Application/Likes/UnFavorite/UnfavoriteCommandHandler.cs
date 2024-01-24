@@ -1,5 +1,4 @@
 using DailyDiary.Application.Common.Interfaces;
-using DailyDiary.Domain.DiaryLikes;
 using DailyDiary.Domain.UserLikes;
 using MediatR;
 
@@ -7,13 +6,11 @@ namespace DailyDiary.Application.Likes.UnFavorite;
 
 public class UnfavoriteCommandHandler : IRequestHandler<UnfavoriteCommand, Unit>
 {
-    private readonly IDiaryLikeRepository _diaryLikeRepository;
     private readonly IUserLikeRepository _userLikeRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public UnfavoriteCommandHandler(IDiaryLikeRepository diaryLikeRepository, IUnitOfWork unitOfWork, IUserLikeRepository userLikeRepository)
+    public UnfavoriteCommandHandler(IUnitOfWork unitOfWork, IUserLikeRepository userLikeRepository)
     {
-        _diaryLikeRepository = diaryLikeRepository;
         _unitOfWork = unitOfWork;
         _userLikeRepository = userLikeRepository;
     }
@@ -23,8 +20,7 @@ public class UnfavoriteCommandHandler : IRequestHandler<UnfavoriteCommand, Unit>
         if (userLike is null)
             return Unit.Value;
         
-        var diaryLike = await _diaryLikeRepository.GetByDiaryId(request.DiaryId);
-        userLike.DecrementLikeEvent(diaryLike.Id);
+        userLike.DecrementLikeEvent(request.DiaryId);
         _userLikeRepository.Delete(userLike);
         await _unitOfWork.Commit(cancellationToken);
         return Unit.Value;

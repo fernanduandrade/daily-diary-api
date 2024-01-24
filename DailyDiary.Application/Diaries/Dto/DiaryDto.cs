@@ -13,7 +13,8 @@ public sealed record DiaryDto : IMapFrom<Diary>
     public string? Mood { get; init; }
     public DateTime CreatedAt { get; init; }
     public Guid Id { get; init; }
-    public bool IsLiked { get; init; }
+    public bool IsFavorited { get; init; }
+    public int LikesCount { get; init; }
     public UserDto User { get; init; }
 
     public void Mapping(Profile profile)
@@ -21,6 +22,10 @@ public sealed record DiaryDto : IMapFrom<Diary>
         profile
             .CreateMap<Diary, DiaryDto>()
             .ForMember(x => x.User, 
-                opt => opt.MapFrom(src => src.User));
+                opt => opt.MapFrom(src => src.User))
+            .ForMember(x => x.LikesCount,
+                opt => opt.MapFrom(src => src.LikeCounter.Counter))
+            .ForMember(x => x.IsFavorited,
+            opt => opt.MapFrom(src => src.IsFavorited));
     }
 }

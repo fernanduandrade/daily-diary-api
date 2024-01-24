@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace DailyDiary.API.Controllers;
 
-[Authorize]
+// [Authorize]
 public class DiariesController : BaseController
 {
     [SwaggerOperation(Summary = "Creates a diary")]

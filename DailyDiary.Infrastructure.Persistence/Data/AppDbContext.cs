@@ -1,7 +1,6 @@
 using System.Reflection;
 using DailyDiary.Domain.Common;
 using DailyDiary.Domain.Diaries;
-using DailyDiary.Domain.DiaryLikes;
 using DailyDiary.Domain.LikesCounter;
 using DailyDiary.Domain.UserLikes;
 using DailyDiary.Domain.Users;
@@ -16,7 +15,6 @@ public class AppDbContext : DbContext
     
     public DbSet<User> Users => Set<User>();
     public DbSet<Diary> Diaries => Set<Diary>();
-    public DbSet<DiaryLike> DiaryLikes => Set<DiaryLike>();
     public DbSet<LikeCounter> LikesCounter => Set<LikeCounter>();
     public DbSet<UserLike> UserLikes => Set<UserLike>();
 

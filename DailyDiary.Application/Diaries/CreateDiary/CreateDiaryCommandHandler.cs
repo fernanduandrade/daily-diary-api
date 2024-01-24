@@ -26,7 +26,7 @@ public class CreateDiaryCommandHandler : IRequestHandler<CreateDiaryCommand, One
 
         var diary = Diary.Create(request.Title, request.Text, request.Mood, request.userId ,request.IsPublic);
         await _diaryRepository.AddAsync(diary);
-        diary.CreateDiaryLike(diary.Id);
+        diary.CreateDiaryLikeCounter(diary.Id);
         await _unitOfWork.Commit(cancellationToken);
         var dto = _mapper.Map<DiaryDto>(diary);
 

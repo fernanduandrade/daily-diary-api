@@ -1,4 +1,5 @@
 using DailyDiary.Domain.LikesCounter;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailyDiary.Infrastructure.Persistence.Data.Repositories;
 
@@ -16,24 +17,27 @@ public class LikeCounterRepository : ILikeCounterRepository
         _context.Add(likeCounter);
     }
 
-    public void Increment(Guid diaryLikeId)
+    public void Increment(Guid diaryId)
     {
-        try
-        {
-            var entity = _context.LikesCounter.FirstOrDefault(x => x.DiaryLikeId == diaryLikeId);
-            entity.Increment();
-        }
-        catch (Exception er)
-        {
-            Console.WriteLine("aaa");
-        }
-        
-        
+        var entity = _context.LikesCounter.FirstOrDefault(x => x.DiaryId == diaryId);
+        entity?.Increment();
     }
 
-    public void Decrement(Guid diaryLikeId)
+    public void Decrement(Guid diaryId)
     {
-        var entity = _context.LikesCounter.FirstOrDefault(x => x.DiaryLikeId == diaryLikeId);
-        entity.Decrement();
+        var entity = _context.LikesCounter.FirstOrDefault(x => x.DiaryId == diaryId);
+        entity?.Decrement();
+    }
+
+    public async Task<int> GetDiaryLikes(Guid diaryId)
+    {
+        var likesCount = await _context.LikesCounter.FirstOrDefaultAsync(x => x.DiaryId == diaryId);
+
+        return likesCount.Counter;
+    }
+
+    public Task<bool> HasUserFavorite(Guid userId)
+    {
+        throw new NotImplementedException();
     }
 }

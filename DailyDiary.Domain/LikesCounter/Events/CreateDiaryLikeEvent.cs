@@ -1,5 +1,5 @@
 using DailyDiary.Domain.Common;
 
-namespace DailyDiary.Domain.DiaryLikes.Events;
+namespace DailyDiary.Domain.LikesCounter.Events;
 
 public sealed record CreateDiaryLikesEvent(Guid diaryId) : IDomainEvent { }

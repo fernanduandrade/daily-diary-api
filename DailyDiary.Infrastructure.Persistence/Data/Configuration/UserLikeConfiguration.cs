@@ -16,5 +16,7 @@ public class UserLikeConfiguration : IEntityTypeConfiguration<UserLike>
         builder.Property(x => x.UserId).HasColumnName("user_id");
         builder.Property(x => x.CreatedAt).HasColumnName("created_at");
         
+        
+        
     }
 }
