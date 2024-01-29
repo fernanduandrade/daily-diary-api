@@ -1,10 +1,11 @@
 using DailyDiary.Application.Common.Interfaces;
+using DailyDiary.Application.Common.Models;
 using DailyDiary.Domain.UserLikes;
 using MediatR;
 
 namespace DailyDiary.Application.Likes.UnFavorite;
 
-public class UnfavoriteCommandHandler : IRequestHandler<UnfavoriteCommand, Unit>
+public class UnfavoriteCommandHandler : IRequestHandler<UnfavoriteCommand, ApiResponse<Unit>>
 {
     private readonly IUserLikeRepository _userLikeRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -14,15 +15,15 @@ public class UnfavoriteCommandHandler : IRequestHandler<UnfavoriteCommand, Unit>
         _unitOfWork = unitOfWork;
         _userLikeRepository = userLikeRepository;
     }
-    public async Task<Unit> Handle(UnfavoriteCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<Unit>> Handle(UnfavoriteCommand request, CancellationToken cancellationToken)
     {
         var userLike = await _userLikeRepository.GetByUserAndDiaryId(request.UserId, request.DiaryId);
         if (userLike is null)
-            return Unit.Value;
+            return ApiResponse<Unit>.Response(Unit.Value, "Error, Diary hasn't been liked", false);
         
         userLike.DecrementLikeEvent(request.DiaryId);
         _userLikeRepository.Delete(userLike);
         await _unitOfWork.Commit(cancellationToken);
-        return Unit.Value;
+        return ApiResponse<Unit>.Response(Unit.Value, "Done");
     }
 }

@@ -1,7 +1,10 @@
 using Bogus;
-using DailyDiary.Domain.Diaries;
+using DailyDiary.API.Migrations;
+using DailyDiary.Domain.LikesCounter;
+using DailyDiary.Domain.UserLikes;
 using DailyDiary.Domain.Users;
 using DailyDiary.Infrastructure.Persistence.Data;
+using Diary = DailyDiary.Domain.Diaries.Diary;
 
 namespace Api.IntegrationTest.Setup;
 
@@ -31,6 +34,16 @@ public class Seeder
         genericDiary.Id = new Guid("4510804c-4d88-4916-bfab-a37e13e32760");
         genericDiary2.Id = new Guid("e89e9fd4-99c3-4f91-a946-7184da2314bc");
         _dbContext.Diaries.AddRange(new List<Diary>() { diary, genericDiary, genericDiary2 });
+        #endregion
+
+        #region LikeData
+        var like = LikeCounter.Create(genericDiary.Id);
+        _dbContext.LikesCounter.Add(like);
+        #endregion
+
+        #region UserLikeData
+        var userLike = UserLike.Create(genericUser.Id, genericDiary.Id);
+        _dbContext.UserLikes.Add(userLike);
         #endregion
         
         _dbContext.SaveChanges();

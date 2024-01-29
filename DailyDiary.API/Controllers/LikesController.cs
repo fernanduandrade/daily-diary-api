@@ -7,7 +7,6 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace DailyDiary.API.Controllers;
 
-[Authorize]
 public class LikesController : BaseController
 {
     [SwaggerOperation(Summary = "Operation when the user likes a diary")]
@@ -15,8 +14,11 @@ public class LikesController : BaseController
     [HttpPost("favorite")]
     public async Task<IActionResult> Favorite(FavoriteCommand command)
     {
-        await Mediator.Send(command);
-        return NoContent();
+        var result = await Mediator.Send(command);
+        if(!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
     }
     
     [SwaggerOperation(Summary = "Operation when the user unlikes a diary")]
@@ -24,7 +26,10 @@ public class LikesController : BaseController
     [HttpPost("unfavorite")]
     public async Task<IActionResult> Favorite(UnfavoriteCommand command)
     {
-        await Mediator.Send(command);
-        return NoContent();
+        var result = await Mediator.Send(command);
+        if(!result.Success)
+            return BadRequest(result);
+
+        return Ok(result);
     }
 }
