@@ -11,10 +11,17 @@ public class DiaryRepository : IDiaryRepository
         => (_context) = (context);
     public async Task<bool> HasPublish(Guid userId)
     {
-        var compareDate = DateTime.UtcNow.Date;
+        DateTime compareDate = DateTime.UtcNow;
         var hasPublish = await _context.Diaries
-            .FirstOrDefaultAsync(x => x.CreatedAt.Date == compareDate && x.UserId == userId);
-        return hasPublish is not null;
+            .FirstOrDefaultAsync(x => x.CreatedAt.Date.Day == compareDate.Day && x.UserId == userId);
+
+        if (hasPublish is null)
+            return false;
+        
+        TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");               
+        DateTime today = TimeZoneInfo.ConvertTime(hasPublish.CreatedAt, tz);
+        DateTime actualDate = TimeZoneInfo.ConvertTime(compareDate, tz);
+        return today.Day == compareDate.Day;
     }
 
     public async Task AddAsync(Diary diary)
@@ -24,9 +31,11 @@ public class DiaryRepository : IDiaryRepository
     {
         var diaries = await _context.Diaries
             .AsNoTracking()
+            .Include(x => x.User)
             .Include(x => x.UserLike)
             .Include(x => x.LikeCounter)
             .Where(x => x.UserId == userId)
+            .OrderBy(x => x.CreatedAt)
             .ToListAsync();
 
         return diaries;

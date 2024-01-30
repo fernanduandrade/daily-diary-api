@@ -1,6 +1,7 @@
 using DailyDiary.Domain.Diaries;
 using DailyDiary.Domain.LikesCounter;
 using DailyDiary.Domain.UserLikes;
+using DailyDiary.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -32,5 +33,10 @@ public class DiaryConfiguration : IEntityTypeConfiguration<Diary>
             .WithOne(x => x.Diary)
             .HasForeignKey<LikeCounter>(x => x.DiaryId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasOne<User>(x => x.User)
+            .WithMany(x => x.Diaries)
+            .HasForeignKey(x => x.UserId);
     }
 }

@@ -10,6 +10,8 @@ public class User : Entity, IAggregateRoot
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 
     public string? Name { get; private set; }
+    
+    public ICollection<Diary> Diaries { get; set; } = new List<Diary>();
 
     public static User Create(Email email, string name, Password password)
     {
