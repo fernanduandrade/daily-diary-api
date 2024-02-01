@@ -21,7 +21,7 @@ public class DiaryRepository : IDiaryRepository
         TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");               
         DateTime today = TimeZoneInfo.ConvertTime(hasPublish.CreatedAt, tz);
         DateTime actualDate = TimeZoneInfo.ConvertTime(compareDate, tz);
-        return today.Day == compareDate.Day;
+        return today.Day == actualDate.Day;
     }
 
     public async Task AddAsync(Diary diary)
@@ -35,7 +35,7 @@ public class DiaryRepository : IDiaryRepository
             .Include(x => x.UserLike)
             .Include(x => x.LikeCounter)
             .Where(x => x.UserId == userId)
-            .OrderBy(x => x.CreatedAt)
+            .OrderByDescending(x => x.CreatedAt)
             .ToListAsync();
 
         return diaries;
